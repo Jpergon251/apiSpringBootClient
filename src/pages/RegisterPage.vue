@@ -1,8 +1,5 @@
 <template>
-    <h1>
-        Error 404
-    </h1>
-    <a href="/">Volver al home</a>
+    <router-link to="/login">Iniciar sesion</router-link>
 </template>
 
 <script>
@@ -14,4 +11,3 @@ export default {
     }
 }
 </script>
-

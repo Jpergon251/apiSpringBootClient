@@ -1,8 +1,7 @@
 <template>
-    <h1>
-        Error 404
-    </h1>
-    <a href="/">Volver al home</a>
+    <div>
+
+    </div>
 </template>
 
 <script>
@@ -14,4 +13,3 @@ export default {
     }
 }
 </script>
-

@@ -1,26 +1,29 @@
 <template>
     <div>
-        <form @submit="login">
-            <input v-model="username" type="text" placeholder="Nombre de usuario" required />
-            <input v-model="password" type="password" placeholder="Contraseña" required />
-            <button type="submit">Iniciar sesión</button>
+        <form @submit.prevent="login">
+            <div>
+                <label for="username">Nombre de usuario</label>
+                <input v-model="username" type="text" id="username" name="username" placeholder="Nombre de usuario"
+                    required />
+            </div>
 
+            <div>
+                <label for="password">Contraseña</label>
+                <input v-model="password" type="password" id="password" name="password" placeholder="Contraseña" required />
+            </div>
+
+            <div>
+                <button type="submit">Iniciar sesión</button>
+            </div>
         </form>
     </div>
 </template>
   
 <script>
 import axios from 'axios';
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://localhost:5173'; // Reemplaza con la URL de tu aplicación Vue.js
 
 axios.defaults.baseURL = 'http://localhost:8080';
-axios.interceptors.request.use((config) => {
-    const token = localStorage.getItem('token');
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-    }
-    return config;
-});
+
 export default {
     data() {
         return {
@@ -29,27 +32,20 @@ export default {
         };
     },
     methods: {
-        async login(event) {
-            event.preventDefault();
-            try {
-                const credentials = this.username + ':' + this.password;
-                const base64Credentials = btoa(credentials);
+        async login() {
+            const successfulLogin = await this.$store.dispatch('login', {
+                username: this.username,
+                password: this.password,
+            });
 
-                const config = {
-                    headers: {
-                        Authorization: 'Basic ' + base64Credentials,
-                    },
-                };
-
-                const response = await axios.post('http://localhost:8080/token', null, config);
-
-                const token = response.data;
-                localStorage.setItem('token', token);
+            if (successfulLogin) {
+                // Redirige al usuario al home
                 this.$router.push({ name: 'home' });
-            } catch (error) {
-                console.error('Error de inicio de sesión:', error);
+            } else {
+                // Maneja el error o muestra un mensaje de inicio de sesión fallido
             }
         },
     },
+
 };
 </script>

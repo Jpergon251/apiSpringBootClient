@@ -1,4 +1,5 @@
 <template>
+    <router-link to="/register">Registrarse</router-link>
     <LoginForm />
 </template>
 

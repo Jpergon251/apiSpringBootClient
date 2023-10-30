@@ -20,6 +20,43 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('../pages/LoginPage.vue')
+  },
+  {
+    path: '/registro',
+    name: 'Registro',
+    component: () => import('../pages/RegisterPage.vue')
+  },
+  {
+    path: '/perfil',
+    name: 'Perfil',
+    component: () => import('../pages/UserPage.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/equipos',
+    name: 'Equipos',
+    component: () => import('../pages/TeamsPage.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/equipos/:equipo',
+    name: 'Equipo',
+    component: () => import('../pages/PlayersPage.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/partidas',
+    name: 'Partidas',
+    component: () => import('../pages/MatchesPage.vue'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
