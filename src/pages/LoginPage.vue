@@ -1,5 +1,5 @@
 <template>
-    <router-link to="/register">Registrarse</router-link>
+    <router-link to="/registro">Registrarse</router-link>
     <LoginForm />
 </template>
 
