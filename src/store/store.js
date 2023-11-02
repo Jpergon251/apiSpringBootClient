@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const token = localStorage.getItem('token');
 axios.defaults.baseURL = 'http://localhost:8080';
@@ -25,7 +26,7 @@ export default createStore({
       state.user.loggedIn = false;
       state.token = null;
       localStorage.removeItem('token');
-
+      Cookies.remove('sesion');
     },
   },
   actions: {

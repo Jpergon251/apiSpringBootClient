@@ -21,7 +21,9 @@
   
 <script>
 import router from '@/router/router';
+import store from '@/store/store';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 export default {
     data() {
         return {
@@ -55,7 +57,7 @@ export default {
                         },
                     }
 
-                    const userResponse = await axios.get('http://localhost:8080/user/', userConfig);
+                    const userResponse = await axios.get('http://localhost:8080/users/', userConfig);
 
                     console.log(userResponse);
                     // Verifica si la respuesta contiene usuarios
@@ -63,10 +65,21 @@ export default {
                         const matchingUser = userResponse.data.find(user => user.username === this.username);
 
                         if (matchingUser) {
+
+                            const user = {
+                                id: matchingUser.id,
+                                username: matchingUser.username,
+                                email: matchingUser.email,
+                                // otros datos del usuario
+                            };
+
+                            store.commit('setUser', user);
+
                             localStorage.setItem('token', token);// Guarda el token en el store
-                            localStorage.setItem(`userData ` + matchingUser.username, JSON.stringify(matchingUser));
+                            localStorage.setItem('userData ' + matchingUser.username, JSON.stringify(matchingUser));
 
 
+                            Cookies.set('session', JSON.stringify({ 'username': matchingUser.username, 'token': token }));
                         } else {
                             console.error('Credenciales inválidas');
                         }
@@ -75,13 +88,15 @@ export default {
                         return false; // Indica que no se encontraron usuarios
                     }
                     // Redirige al usuario al home
-                    this.$router.replace('/');
+                    window.location.href = '/';
+
+
                 } else {
                     // Maneja el error o muestra un mensaje de inicio de sesión fallido
                     console.error(response.data);
                 }
             } catch (error) {
-                // Maneja el error de inicio de sesión
+                this.errorMessage = 'Error al iniciar sesión'; // Mensaje de error general
                 console.error(error);
             }
         },
