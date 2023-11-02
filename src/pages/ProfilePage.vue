@@ -2,8 +2,8 @@
     <div>
         <SingOutBut />
 
-
-
+        <h2>Nombre de usuario: {{ user.username }}</h2>
+        <h2>Email: {{ user.email }}</h2>
     </div>
 </template>
 
