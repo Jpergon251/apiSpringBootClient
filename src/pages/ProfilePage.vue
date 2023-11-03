@@ -2,8 +2,25 @@
     <div>
         <SingOutBut />
 
-        <h2>Nombre de usuario: {{ user.username }}</h2>
-        <h2>Email: {{ user.email }}</h2>
+        <h2>Rol: </h2>
+        <p>{{ user.role }}</p>
+        <h2>Nombre de usuario: </h2>
+        <p>{{ user.username }}</p>
+        <h2>Email: </h2>
+        <p>{{ user.email }}</p>
+        <h2>Jugadores Favoritos</h2>
+        <p>{{ user.jugadoresFavoritos }}</p>
+        <button v-if="isAdmin" @click="getUsers(), isShowed = !isShowed">
+            {{ isShowed ? 'Ocultar lista de usuarios' : 'Mostrar lista deusuarios' }}
+        </button>
+
+
+        <ul v-if="isShowed">
+            <h3>Usuarios</h3>
+            <li v-for="user in users" :key="user.id">
+                {{ user.username }}
+            </li>
+        </ul>
     </div>
 </template>
 
@@ -11,13 +28,16 @@
 import axios from 'axios'
 import SingOutBut from '../components/SingOutBut.vue'
 import store from '@/store/store';
-import Cookies from 'js-cookie';
+import router from '@/router/router';
 export default {
     data() {
         return {
             user: {
 
-            }
+            },
+            isAdmin: false,
+            users: [],
+            isShowed: false
         }
     },
     created() {
@@ -26,22 +46,53 @@ export default {
     methods: {
         async loadUser() {
 
-            const cookieValue = Cookies.get('session');
-            const decodedCookie = JSON.parse(cookieValue)
-            const username = decodedCookie.username
-
-            const userId = JSON.parse(localStorage.getItem(`userData ${username}`)).id;
-
 
             const config = {
                 headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    Authorization: `Bearer ${store.state.token}`,
                 }
             }
-            console.log(userId);
-            const response = await axios.get('http://localhost:8080/users/' + userId, config);
+            try {
+                const response = await axios.get('http://localhost:8080/users/dto/' + store.state.sessionData.id, config);
+                if (response.status == 200) {
+                    this.user = response.data;
+                    if (this.user.role == 'ADMIN') {
+                        this.isAdmin = true;
+                    }
 
-            this.user = response.data;
+                }
+            } catch (e) {
+                console.log(e);
+                if (e.response.status === 401) {
+
+                } else if (e.response.status === 404) {
+                    router.push('/badsession');
+                }
+            }
+
+        },
+        async getUsers() {
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${store.state.token}`, // Agrega el token JWT a los encabezados de la solicitud
+                }
+
+            };
+
+            try {
+                if (this.user.role === 'ADMIN') {
+
+                    const response = await axios.get('http://localhost:8080/users/', config);
+
+                    this.users = response.data;
+
+                }
+
+
+            } catch (error) {
+                // Manejo de errores
+                console.error(error);
+            }
         }
     },
     components: {

@@ -4,16 +4,17 @@
 
 <script>
 import store from '@/store/store';
+import Cookies from 'js-cookie';
 
 export default {
     data() {
         return {
-            isLoggedIn: this.$store.getters.isLoggedIn, // Define la propiedad aquí
+            isLoggedIn: store.state.loggedIn, // Define la propiedad aquí
         };
     },
     methods: {
         logout() {
-            this.$store.commit('logout'); // Llama a la mutación 'logout' del store
+            Cookies.remove('session');
             window.location.reload(); // Recarga la página
         },
     },

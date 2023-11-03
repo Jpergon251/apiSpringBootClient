@@ -27,6 +27,11 @@ const routes = [
     component: () => import('../pages/RegisterPage.vue')
   },
   {
+    path: '/badsession',
+    name: 'BadSession',
+    component: () => import('../pages/BadSessionPage.vue')
+  },
+  {
     path: '/perfil',
     name: 'Perfil',
     component: () => import('../pages/ProfilePage.vue'),
@@ -43,7 +48,7 @@ const routes = [
     }
   },
   {
-    path: '/equipos/:equipo',
+    path: '/equipos/:id',
     name: 'Equipo',
     component: () => import('../pages/PlayersPage.vue'),
     meta: {
@@ -66,7 +71,7 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (store.state.user.loggedIn) {
+    if (store.state.loggedIn) {
       next();
     } else {
       next({ name: "Login" });

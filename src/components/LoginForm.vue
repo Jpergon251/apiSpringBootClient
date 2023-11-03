@@ -33,18 +33,22 @@ export default {
     },
     methods: {
         async login() {
+
+            console.log(store.state.loggedIn);
+
+            const credentials = `${this.username}:${this.password}`;
+            const base64Credentials = btoa(credentials);
+
+            console.log(`${base64Credentials}`);
+
+            const config = {
+                headers: {
+                    Authorization: `Basic ${base64Credentials}`,
+                },
+            };
             try {
 
-                const credentials = `${this.username}:${this.password}`;
-                const base64Credentials = btoa(credentials);
 
-                console.log(`${base64Credentials}`);
-
-                const config = {
-                    headers: {
-                        Authorization: `Basic ${base64Credentials}`,
-                    },
-                };
 
                 const response = await axios.post('http://localhost:8080/token', null, config);
                 const token = response.data;
@@ -57,47 +61,51 @@ export default {
                         },
                     }
 
-                    const userResponse = await axios.get('http://localhost:8080/users/', userConfig);
+                    try {
+                        const userResponse = await axios.get('http://localhost:8080/users/dto/', userConfig);
+                        if (userResponse.data && userResponse.data.length > 0) {
+                            const matchingUser = userResponse.data.find(user => user.username === this.username);
+
+                            if (matchingUser) {
+
+                                const user = {
+                                    id: matchingUser.id,
+                                    username: matchingUser.username,
+                                    email: matchingUser.email,
+                                    // otros datos del usuario
+                                };
+
+                                store.commit('setUser', user);
+
+
+                                Cookies.set('session', JSON.stringify({ 'id': matchingUser.id, 'username': matchingUser.username, 'token': token, 'role': matchingUser.role }));
+                                // Redirige al usuario al home
+                                window.location.href = '/';
+                            } else {
+                                console.error('Credenciales inválidas');
+                            }
+                        } else {
+                            console.error('No se encontraron usuarios');
+                            return false; // Indica que no se encontraron usuarios
+                        }
+                    } catch (userError) {
+                        console.error(userError);
+                    }
+
+
 
                     console.log(userResponse);
                     // Verifica si la respuesta contiene usuarios
-                    if (userResponse.data && userResponse.data.length > 0) {
-                        const matchingUser = userResponse.data.find(user => user.username === this.username);
-
-                        if (matchingUser) {
-
-                            const user = {
-                                id: matchingUser.id,
-                                username: matchingUser.username,
-                                email: matchingUser.email,
-                                // otros datos del usuario
-                            };
-
-                            store.commit('setUser', user);
-
-                            localStorage.setItem('token', token);// Guarda el token en el store
-                            localStorage.setItem('userData ' + matchingUser.username, JSON.stringify(matchingUser));
 
 
-                            Cookies.set('session', JSON.stringify({ 'username': matchingUser.username, 'token': token }));
-                        } else {
-                            console.error('Credenciales inválidas');
-                        }
-                    } else {
-                        console.error('No se encontraron usuarios');
-                        return false; // Indica que no se encontraron usuarios
-                    }
-                    // Redirige al usuario al home
-                    window.location.href = '/';
 
 
                 } else {
                     // Maneja el error o muestra un mensaje de inicio de sesión fallido
                     console.error(response.data);
                 }
-            } catch (error) {
-                this.errorMessage = 'Error al iniciar sesión'; // Mensaje de error general
-                console.error(error);
+            } catch (tokenError) {
+                console.error(tokenError);
             }
         },
     },

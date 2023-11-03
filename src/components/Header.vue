@@ -1,5 +1,5 @@
 <template>
-    <header v-if="$store.getters.isLoggedIn" class="header">
+    <header v-if="loggedIn" class="header">
         <figure class="logo">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/League_of_Legends_2019_vector.svg/800px-League_of_Legends_2019_vector.svg.png"
                 alt="Logo">
@@ -22,10 +22,14 @@
 </template>
 
 <script>
+import store from '@/store/store';
+
+
 export default {
     name: 'Header',
     data() {
         return {
+            loggedIn: store.state.loggedIn,
             isActive: true,
         };
     },

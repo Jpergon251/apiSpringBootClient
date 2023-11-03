@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p class="error-message">{{ message }}</p>
+        <p v-if="message" class="error-message">{{ message }}</p>
         <input v-model="formData.username" placeholder="Nombre de usuario" required />
         <input v-model="formData.email" placeholder="Correo electrónico" required />
         <input v-model="formData.password" type="password" placeholder="Contraseña" required />
@@ -10,7 +10,7 @@
 
 <script>
 import axios from 'axios';
-
+import store from '@/store/store';
 export default {
     data() {
         return {
@@ -22,8 +22,11 @@ export default {
             message: '',
         };
     },
+
     methods: {
+
         async register() {
+            this.message = '';
             try {
                 const response = await axios.post('http://localhost:8080/users/create', this.formData);
 
@@ -34,12 +37,15 @@ export default {
                     // Lleva a la página de inicio de sesión
                     this.$router.push('/login');
                 } else {
-                    // Muestra un mensaje de error o maneja el error de alguna otra manera.
-                    console.error(response.data);
+                    // Otro error
+                    console.error('Error al registrar al usuario:', response.data);
                 }
             } catch (error) {
-                this.message = error.response.data;
-                console.error('Error al registrar al usuario:', error.response.data);
+                if (error.response.status === 400) {
+                    // Error de validación
+                    this.message = error.response.data;
+                    console.error('Error de validación:', error.response.data);
+                }
             }
         },
     },

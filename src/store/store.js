@@ -2,33 +2,28 @@ import { createStore } from 'vuex';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const token = localStorage.getItem('token');
-axios.defaults.baseURL = 'http://localhost:8080';
+
+const cookieValue = Cookies.get('session');
+const decodedCookie = cookieValue ? JSON.parse(cookieValue) : {};
+
+
 export default createStore({
   state: {
     user: {
-      loggedIn: !!token,
+
     },
-    token: token || null,
+    token: decodedCookie.token || null,
+    sessionData: {
+      id: decodedCookie?.id,
+      username: decodedCookie.username,
+      role: decodedCookie.role
+    },
+    loggedIn: !!decodedCookie.token,
   },
   getters: {
-    isLoggedIn: (state) => !!state.user.loggedIn, // Devuelve true si el usuario está autenticado
+    isLoggedIn: (state) => !!state.loggedIn, // Devuelve true si el usuario está autenticado
   },
-  mutations: {
-    setUser(state, user) {
-      state.user.loggedIn = true;
-    },
-    setToken(state, token) {
-      state.token = token;
-      state.user.loggedIn = true; // Establece el estado como autenticado cuando se tiene un token
-    },
-    logout(state) {
-      state.user.loggedIn = false;
-      state.token = null;
-      localStorage.removeItem('token');
-      Cookies.remove('sesion');
-    },
-  },
+
   actions: {
 
   },
