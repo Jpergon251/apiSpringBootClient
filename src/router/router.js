@@ -50,7 +50,15 @@ const routes = [
   {
     path: '/equipos/:id',
     name: 'Equipo',
-    component: () => import('../pages/PlayersPage.vue'),
+    component: () => import('../pages/TeamPlayersPage.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/jugadores/:id',
+    name: 'Jugador',
+    component: () => import('../pages/PlayerPage.vue'),
     meta: {
       requiresAuth: true
     }
