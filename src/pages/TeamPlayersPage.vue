@@ -1,25 +1,14 @@
 <template>
     <div class="equipo-page">
-        <section class="jugadores-list">
-            <h2>Jugadores</h2>
-            <p></p>
-            <div class="jugador" v-for="player in equipo.jugadores" :key="player.id">
-                <!-- <router-link :to="{ name: 'Jugador', params: { id: player.id } }">
-
-                </router-link> -->
-            </div>
+        <section class="equipo-info">
+            <h2 class="equipo-title">Info</h2>
+        </section>
+        <section class="equipo-jugadores">
+            <h2 class="equipo-title">Jugadores</h2>
         </section>
 
         <section class="equipo-stats">
-
-            <p>Victorias: {{ equipo.victorias }}</p>
-            <p>Derrotas: {{ equipo.derrotas }}</p>
-            <p>Oro por minuto: {{ (equipo.oro / (equipo.tiempoDeJuego / 60)).toFixed(2) }}</p>
-            <p>Barones: {{ equipo.barones }}</p>
-            <p>Dragones: {{ equipo.dragones }}</p>
-            <p>Minions por minuto: {{ (equipo.minions / (equipo.tiempoDeJuego / 60)).toFixed(2) }}</p>
-            <p>Tiempo de juego: {{ Math.floor(equipo.tiempoDeJuego / 60) }}h {{ equipo.tiempoDeJuego % 60 }}min</p>
-            <p>KDA promedio: {{ kdaPromedio() }}</p>
+            <h2 class="equipo-title">Estadisticas</h2>
         </section>
 
 

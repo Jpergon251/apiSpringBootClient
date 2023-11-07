@@ -1,6 +1,6 @@
 <template>
     <section class="equipos-container">
-        <h1 class="equipos-title">Equipos</h1>
+        <h1 class="equipos-title">EQUIPOS</h1>
         <ul class="equipos-list">
             <router-link :to="{ name: 'Equipo', params: { id: equipo.id } }" v-for="equipo in equipos" :key="equipo.id"
                 class="equipo-item">
