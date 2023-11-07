@@ -34,12 +34,8 @@ export default {
     methods: {
         async login() {
 
-            console.log(store.state.loggedIn);
-
             const credentials = `${this.username}:${this.password}`;
             const base64Credentials = btoa(credentials);
-
-            console.log(`${base64Credentials}`);
 
             const config = {
                 headers: {
@@ -68,16 +64,6 @@ export default {
 
                             if (matchingUser) {
 
-                                const user = {
-                                    id: matchingUser.id,
-                                    username: matchingUser.username,
-                                    email: matchingUser.email,
-                                    // otros datos del usuario
-                                };
-
-                                store.commit('setUser', user);
-
-
                                 Cookies.set('session', JSON.stringify({ 'id': matchingUser.id, 'username': matchingUser.username, 'token': token, 'role': matchingUser.role }));
                                 // Redirige al usuario al home
                                 window.location.href = '/';
@@ -91,14 +77,6 @@ export default {
                     } catch (userError) {
                         console.error(userError);
                     }
-
-
-
-                    console.log(userResponse);
-                    // Verifica si la respuesta contiene usuarios
-
-
-
 
                 } else {
                     // Maneja el error o muestra un mensaje de inicio de sesión fallido

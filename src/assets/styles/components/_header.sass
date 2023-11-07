@@ -1,40 +1,106 @@
+@import "../utilities/_variables"
 .header
-    color: #ee5959
+    height: 95px
     display: flex
     align-items: center
     justify-content: space-between
-    padding: 10px 20px
+    background-color: #ffd8d8
 
-.logo img
-    max-height: 60px
+    .logo img
+        max-height: 60px
 
-.sponsor-group
-    display: flex
-    align-items: center
+    .sponsor-group
+        display: flex
+        flex-direction: column
+        align-items: center
 
-    .sponsor-thanks
-        margin-right: 10px
+        .sponsor-thanks
+            margin: 0px 10px
 
-    .sponsor-image
-        width: 30px
-        height: 30px
-        background: url('url-de-la-imagen.png') center/cover
+        .sponsor-logo
+            width: 200px
+            height: 66px
+            animation: slide-up 45s infinite
+            background-size: contain
+            background-repeat: no-repeat
+    .menu
+        .menu-icon
+            display: none
+            margin: 20px
+            &:hover
+                color: $color-accent
+        .nav-menu
+            display: flex
+            align-items: center
+            .link
+                margin: 5px 0px
+                padding: 5px 10px
+                text-decoration: none
+                color: #000
+                font-weight: bold
+                &:hover
+                    color: #e93c3c
+            .router-link-active
+                color: #fff
+                background-color: #e93c3c
+                padding: 5px 10px
+                border-radius: 5px
+                &:hover
+                    color: #fff
 
-.menu-icon
-    font-size: 24px
-    cursor: pointer
-    color: #000000
+@media screen and (max-width: 820px)
+    .header
 
-.menu
+        .menu
+            z-index: 1
+            .menu-icon
+                display: block
+                font-size: 28px
+                cursor: pointer
+            .nav-menu
+                display: none
+                &.active
+                    width: 100px
+                    position: absolute
+                    top: 75px
+                    right: 10px
+                    border: 1px solid #ccc
+                    border-radius: 5px
+                    background-color: #fff
+                    padding: 10px
+                    display: flex
+                    flex-direction: column
 
-    .link
-        margin: 10px
-        text-decoration: none
-        color: #000000
-
-    &:hover
-        text-decoration: underline
-
-    &.active
-        display: block
-        display: none
+@keyframes slide-up
+    0%
+        background-image: url("https://i.ibb.co/rkXzhTP/sponsor2.png")
+    7%
+        background-image: url("https://i.ibb.co/tB69SxH/sponsor1.png")
+    13%
+        background-image: url("https://i.ibb.co/MBKzv8h/sponsor3.png")
+    20%
+        background-image: url("https://i.ibb.co/k0k96FN/sponsor4.png")
+    27%
+        background-image: url("https://i.ibb.co/hLkMmMY/sponsor5.png")
+    33%
+        background-image: url("https://i.ibb.co/bW7X8y3/sponsor6.png")
+    40%
+        background-image: url("https://i.ibb.co/vckN6G0/sponsor7.png")
+    47%
+        background-image: url("https://i.ibb.co/xhnX3qp/sponsor8.png")
+    53%
+        background-image: url("https://i.ibb.co/dGW0Vns/sponsor9.png")
+    60%
+        background-image: url("https://i.ibb.co/KVgMWBN/sponsor10.png")
+    67%
+        background-image: url("https://i.ibb.co/dgfC3vp/sponsor11.png")
+    73%
+        background-image: url("https://i.ibb.co/ZxzbHJ5/sponsor12.png")
+    80%
+        background-image: url("https://i.ibb.co/SBd4S56/sponsor13.png")
+    87%
+        background-image: url("https://i.ibb.co/wWx2W61/sponsor14.png")
+    93%
+        background-image: url("https://i.ibb.co/F6wzYSW/sponsor15.png")
+    100%
+        background-image: url("https://i.ibb.co/rkXzhTP/sponsor2.png")

@@ -1,12 +1,29 @@
 <template>
-    <div>
-        <ul>
-            <li v-for="partida in partidas" :key="partida.id">
-                <h2>{{ partida.equipoVisitante.nombre }} vs {{ partida.equipoLocal.nombre }}</h2>
-                <span>{{ partida.fecha }}</span>
-            </li>
-        </ul>
-    </div>
+    <ul class="partidas-list">
+        <li class="partida" v-for="partida in partidas" :key="partida.id">
+            <section class="equipos-partida">
+                <section class="equipo-container">
+                    <figure class="equipo-logo">
+                        <img class="equipo-logo-imagen" src="#" alt="Logo equipo">
+                    </figure>
+                    <h2 class="equipo-nombre">{{ partida.equipoLocal.nombre }}</h2>
+                    <p class="equipo-ganador">{{ partida.equipoGanador === partida.equipoLocal.nombre ? 'Victoria' :
+                        'Derrota' }}</p>
+                </section>
+                <span class="versus">VS</span>
+                <section class="equipo-container">
+                    <figure class="equipo-logo">
+                        <img class="equipo-logo-imagen" src="#" alt="Logo equipo">
+                    </figure>
+                    <h2 class="equipo-nombre">{{ partida.equipoVisitante.nombre }}</h2>
+                    <p class="equipo-ganador">{{ partida.equipoGanador === partida.equipoVisitante.nombre ? 'Victoria' :
+                        'Derrota' }}
+                    </p>
+                </section>
+            </section>
+            <span class="fecha-partida">{{ partida.fecha }}</span>
+        </li>
+    </ul>
 </template>
 
 <script>
@@ -21,6 +38,7 @@ export default {
     created() {
         this.getMatches();
     },
+
     methods: {
         async getMatches() {
 
@@ -39,7 +57,8 @@ export default {
             } catch (error) {
 
             }
-        }
+        },
     }
+
 }
 </script>

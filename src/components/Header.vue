@@ -6,18 +6,22 @@
         </figure> -->
         <section class="sponsor-group">
             <span class="sponsor-thanks">Gracias por patrocinarnos</span>
-            <a class="sponsor-image"></a>
+            <a href="#" class="sponsor-logo"></a>
         </section>
 
-        <div class="menu-icon" @click="toggleMenu">
-            <i class="fas fa-bars"></i>
-        </div>
-        <nav class="menu" :class="{ active: isActive }">
-            <router-link to="/" class="link">Inicio</router-link>
-            <router-link to="/equipos" class="link">Equipos</router-link>
-            <router-link to="/partidas" class="link">Partidas</router-link>
-            <router-link to="/perfil" class="link">Perfil</router-link>
-        </nav>
+
+        <section class="menu">
+            <figure class="menu-icon" @click="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </figure>
+            <nav class="nav-menu " :class="{ 'active': isActive }">
+                <router-link to="/" class="link">Inicio</router-link>
+                <router-link to="/equipos" class="link">Equipos</router-link>
+                <router-link to="/partidas" class="link">Partidas</router-link>
+                <router-link to="/perfil" class="link">Perfil</router-link>
+            </nav>
+        </section>
+
     </header>
 </template>
 
@@ -30,13 +34,15 @@ export default {
     data() {
         return {
             loggedIn: store.state.loggedIn,
-            isActive: true,
+            isActive: false,
         };
     },
+
     methods: {
         toggleMenu() {
             this.isActive = !this.isActive;
         },
+
     },
 };
 </script>

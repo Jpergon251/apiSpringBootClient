@@ -1,26 +1,55 @@
+.equipos-container
+    display: flex
+    flex-direction: column
+    align-items: center
 
-// estilos.sass
-section
-    padding: 10px
-    ul
+    .equipos-list
+        max-width: 1000px
         padding: 5px
         list-style: none
-        display: flex
-        flex-wrap: wrap
-        justify-content: space-between
+        display: grid
+        grid-template-columns: repeat(4, 1fr) // Define 4 columnas autoajustables
+        gap: 20px // Espacio entre elementos
 
+        a
+            text-decoration: none
+            color: #000
+            &:hover
+                text-decoration: underline
+                scale: 1.1
         .equipo-item
-            width: 100px
             display: flex
+            flex-direction: column
             align-items: center
             margin-bottom: 10px
+            box-shadow: 0px 5px 10px 5px rgba(0, 0, 0, 0.1)
             .equipo-logo
                 width: 150px
                 margin: 10px
             .equipo-nombre
-                font-size: 18px
+                font-size: 24px
+                font-weight: bold
     .equipos-title
-
-        font-size: 24px
+        margin: 0
+        padding: 20px 0px
+        width: 100%
+        font-size: 42px
         margin-bottom: 10px
         text-align: center
+        background-color: #ff0000
+        color: white
+        font-weight: bold
+@media screen and (max-width: 768px)
+    .equipos-container
+
+        .equipos-list
+            grid-template-columns: repeat(3, 1fr) // Cambia el número de columnas en pantallas más pequeñas
+
+@media screen and (max-width: 560px)
+    .equipos-container
+        .equipos-list
+            grid-template-columns: repeat(2, 1fr) // Cambia el número de columnas en pantallas medianas
+@media screen and (max-width: 400px)
+    .equipos-container
+        .equipos-list
+            grid-template-columns: 1fr
