@@ -1,6 +1,8 @@
 <template>
-    <router-link to="/login">Iniciar sesion</router-link>
-    <RegisterForm />
+    <main>
+        <router-link to="/login">Iniciar sesion</router-link>
+        <RegisterForm />
+    </main>
 </template>
 
 <script>

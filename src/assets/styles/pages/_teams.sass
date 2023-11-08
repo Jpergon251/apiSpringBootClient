@@ -17,6 +17,7 @@
             &:hover
                 text-decoration: underline
                 scale: 1.1
+                transition: all 0.1s
         .equipo-item
             width: 250px
             display: flex
@@ -35,23 +36,24 @@
         margin: 0
         padding: 20px 0px
         width: 100%
-        font-size: 42px
-        margin-bottom: 10px
-        text-align: center
-        background-color: #ff0000
         color: white
+        text-align: center
+        font-size: 42px
         font-weight: bold
-@media screen and (max-width: 768px)
+        background: $gradient-title-background
+@media screen and (max-width: 1250px)
     .equipos-container
 
         .equipos-list
             grid-template-columns: repeat(3, 1fr) // Cambia el número de columnas en pantallas más pequeñas
 
-@media screen and (max-width: 560px)
+@media screen and (max-width: 768px)
     .equipos-container
         .equipos-list
             grid-template-columns: repeat(2, 1fr) // Cambia el número de columnas en pantallas medianas
-@media screen and (max-width: 400px)
+@media screen and (max-width: 560px)
     .equipos-container
         .equipos-list
-            grid-template-columns: 1fr
+            margin-top: -250px
+            scale: 0.65
+            grid-template-columns: repeat(2, 1fr)

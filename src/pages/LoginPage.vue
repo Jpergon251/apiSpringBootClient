@@ -1,6 +1,8 @@
 <template>
-    <router-link to="/registro">Registrarse</router-link>
-    <LoginForm />
+    <main>
+        <router-link to="/registro">Registrarse</router-link>
+        <LoginForm />
+    </main>
 </template>
 
 <script>

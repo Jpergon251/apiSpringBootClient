@@ -1,15 +1,17 @@
 <template>
-    <section class="player-info">
-        <h2>{{ player.nick }}</h2>
-        <p class="player-name">Nombre: {{ player.nombre }}</p>
-        <p class="player-position">Posición: {{ player.posicion }}</p>
-        <p class="player-age">Edad: {{ player.edad }}</p>
-        <p class="player-nationality">Nacionalidad: {{ player.nacionalidad }}</p>
-        <p class="player-favorite-champion">Campeón Favorito: {{ player.campeonFavorito }}</p>
-        <p class="player-kda">KDA: {{ player.kda }}</p>
-        <img class="player-photo" :src="player.foto" alt="Foto del jugador" />
-        <p class="player-team">Equipo: {{ player.equipo }}</p>
-    </section>
+    <main>
+        <section class="player-info">
+            <h2>{{ player.nick }}</h2>
+            <p class="player-name">Nombre: {{ player.nombre }}</p>
+            <p class="player-position">Posición: {{ player.posicion }}</p>
+            <p class="player-age">Edad: {{ player.edad }}</p>
+            <p class="player-nationality">Nacionalidad: {{ player.nacionalidad }}</p>
+            <p class="player-favorite-champion">Campeón Favorito: {{ player.campeonFavorito }}</p>
+            <p class="player-kda">KDA: {{ player.kda }}</p>
+            <img class="player-photo" :src="player.foto" alt="Foto del jugador" />
+            <p class="player-team">Equipo: {{ player.equipo }}</p>
+        </section>
+    </main>
 </template>
 
 <script>

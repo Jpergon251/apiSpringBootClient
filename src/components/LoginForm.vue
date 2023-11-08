@@ -63,10 +63,13 @@ export default {
                             const matchingUser = userResponse.data.find(user => user.username === this.username);
 
                             if (matchingUser) {
-
-                                Cookies.set('session', JSON.stringify({ 'id': matchingUser.id, 'username': matchingUser.username, 'token': token, 'role': matchingUser.role }));
-                                // Redirige al usuario al home
-                                window.location.href = '/';
+                                if (matchingUser.role === 'BANNED') {
+                                    window.location.href = '/blocked';
+                                } else {
+                                    Cookies.set('session', JSON.stringify({ 'id': matchingUser.id, 'username': matchingUser.username, 'token': token, 'role': matchingUser.role }));
+                                    // Redirige al usuario al home
+                                    window.location.href = '/';
+                                }
                             } else {
                                 console.error('Credenciales inválidas');
                             }

@@ -4,6 +4,15 @@
     flex-direction: column
     align-items: center
     list-style: none
+    .partidas-title
+        margin: 0
+        padding: 20px 0px
+        width: 100%
+        color: white
+        text-align: center
+        font-size: 42px
+        font-weight: bold
+        background: $gradient-title-background
     .partida
         border-radius: 5px
         width: 500px
@@ -28,13 +37,13 @@
                         padding: 10px
                 .equipo-estado
                     font-weight: bold
-                    font-size: 18px 
+                    font-size: 18px
                     animation: destello 3s infinite
                     &.Victoria
                         color: green
                     &.Derrota
                         color: red
-                        
+
         .versus
             font-size: 36px
             font-weight: bold
@@ -47,7 +56,6 @@
             font-weight: bold
             padding: 10px
             border-radius: 5px
-            
 
 @media screen and (max-width: 560px)
     .partidas-list
@@ -62,9 +70,8 @@
 
 @keyframes destello
     0%
-        text-shadow: 0px 0px 5px 
+        text-shadow: 0px 0px 5px
     50%
         text-shadow: 0px 0px 1px
     100%
         text-shadow: 0px 0px 5px
-        

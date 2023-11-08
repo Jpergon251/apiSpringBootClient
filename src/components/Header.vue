@@ -5,7 +5,6 @@
                 alt="Logo">
         </figure> -->
         <section class="sponsor-group">
-            <span class="sponsor-thanks">Gracias por patrocinarnos</span>
             <a href="#" class="sponsor-logo"></a>
         </section>
 

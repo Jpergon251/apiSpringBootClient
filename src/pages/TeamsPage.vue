@@ -1,5 +1,5 @@
 <template>
-    <section class="equipos-container">
+    <main class="equipos-container">
         <h1 class="equipos-title">EQUIPOS</h1>
         <ul class="equipos-list">
             <router-link :to="{ name: 'Equipo', params: { id: equipo.id } }" v-for="equipo in equipos" :key="equipo.id"
@@ -8,7 +8,7 @@
                 <p class="equipo-nombre">{{ equipo.nombre }}</p>
             </router-link>
         </ul>
-    </section>
+    </main>
 </template>
 
 <script>

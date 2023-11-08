@@ -32,6 +32,11 @@ const routes = [
     component: () => import('../pages/BadSessionPage.vue')
   },
   {
+    path: '/blocked',
+    name: 'Blocked',
+    component: () => import('../pages/BlockedUserPage.vue')
+  },
+  {
     path: '/perfil',
     name: 'Perfil',
     component: () => import('../pages/ProfilePage.vue'),

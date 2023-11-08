@@ -1,5 +1,6 @@
 <template>
     <footer class="footer">
+        <section></section>
         <section class="sponsor-section">
             <div class="sponsor-container">
                 <img class="sponsor-image" src="https://i.ibb.co/rkXzhTP/sponsor2.png" alt="sponsor2">
@@ -21,14 +22,11 @@
         </section>
         <section class="info-section">
             <div class="copyright">
-                <p>
+                <p class="copyright-text">
                     &copy; 2023 Todos los derechos reservados.
                 </p>
-                <p>
-                    <a href="#">Condiciones de uso</a>
-                </p>
-                <p>
-                    <a href="#">Politica de cookies</a>
+                <p class="terms">
+                    <a class="link" href="#">Condiciones de uso</a> | <a href="#">Politica de cookies</a>
                 </p>
             </div>
             <div class="social-icons">

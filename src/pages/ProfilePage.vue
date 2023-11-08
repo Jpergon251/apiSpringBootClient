@@ -1,27 +1,45 @@
 <template>
-    <div>
-        <SingOutBut />
+    <main class="profile-container">
+        <h1 class="profile-title">PERFIL</h1>
+        <section class="user-info">
+            <SingOutBut class="singout-but" />
+            <section class="user-card">
+                <h2>Rol: </h2>
+                <p>{{ user.role }}</p>
+                <h2>Nombre de usuario: </h2>
+                <p>{{ user.username }}</p>
+                <h2>Email: </h2>
+                <p>{{ user.email }}</p>
+            </section>
 
-        <h2>Rol: </h2>
-        <p>{{ user.role }}</p>
-        <h2>Nombre de usuario: </h2>
-        <p>{{ user.username }}</p>
-        <h2>Email: </h2>
-        <p>{{ user.email }}</p>
-        <h2>Jugadores Favoritos</h2>
-        <p>{{ user.jugadoresFavoritos }}</p>
-        <button v-if="isAdmin" @click="getUsers(), isShowed = !isShowed">
-            {{ isShowed ? 'Ocultar lista de usuarios' : 'Mostrar lista deusuarios' }}
-        </button>
+        </section>
 
-
-        <ul v-if="isShowed">
-            <h3>Usuarios</h3>
-            <li v-for="user in users" :key="user.id">
-                {{ user.username }}
-            </li>
-        </ul>
-    </div>
+        <section class="players-section">
+            <h2 class="players-title">JUGADORES</h2>
+            <p>{{ user.jugadoresFavoritos }}</p>
+        </section>
+        <section class="users">
+            <button class="hide-but" v-if="isAdmin" @click="getUsers(), isShowed = !isShowed">
+                {{ isShowed ? 'Ocultar lista de usuarios' : 'Mostrar lista de usuarios' }}
+            </button>
+            <ul class="users-list" v-if="isShowed">
+                <h3 class="users-title">Usuarios</h3>
+                <li class="user-card" v-for="user in users" :key="user.id">
+                    <section class="user-data">
+                        <h3 class="username">{{ user.username }}</h3>
+                        <p class="email">{{ user.email }}</p>
+                        <p class="role">{{ user.role }}</p>
+                    </section>
+                    <section class="users-buttons">
+                        <button class="edit-but">Editar<i class="fas fa-pen"></i></button>
+                        <button class="block-but">Bloquear<i class="fas fa-ban "></i></button>
+                        <button class="unblock-but">Desbloquear <i class="fas fa-lock-open"></i></button>
+                        <button class="delete-but">Eliminar <i class="fas fa-xmark"></i></button>
+                    </section>
+                </li>
+            </ul>
+        </section>
+    </main>
 </template>
 
 <script>
