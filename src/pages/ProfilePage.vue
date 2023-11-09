@@ -1,22 +1,29 @@
 <template>
     <main class="profile-container">
         <h1 class="profile-title">PERFIL</h1>
+
         <section class="user-info">
-            <SingOutBut class="singout-but" />
+
             <section class="user-card">
-                <h2>Rol: </h2>
-                <p>{{ user.role }}</p>
-                <h2>Nombre de usuario: </h2>
-                <p>{{ user.username }}</p>
-                <h2>Email: </h2>
-                <p>{{ user.email }}</p>
+                <section class="titles-section">
+                    <h2 class="user-title">Rol: </h2>
+                    <h2 class="user-title">Nombre de usuario: </h2>
+                    <h2 class="user-title">Email: </h2>
+                </section>
+                <section class="entries-section">
+                    <p class="user-entry" :class="myUser.role">{{ myUser.role }}</p>
+                    <p class="user-entry">{{ myUser.username }}</p>
+                    <p class="user-entry">{{ myUser.email }}</p>
+                </section>
+                <SingOutBut class="singout-but" />
+
             </section>
 
         </section>
 
         <section class="players-section">
             <h2 class="players-title">JUGADORES</h2>
-            <p>{{ user.jugadoresFavoritos }}</p>
+            <p>{{ myUser.jugadoresFavoritos }}</p>
         </section>
         <section class="users">
             <button class="hide-but" v-if="isAdmin" @click="getUsers(), isShowed = !isShowed">
@@ -50,7 +57,7 @@ import router from '@/router/router';
 export default {
     data() {
         return {
-            user: {
+            myUser: {
 
             },
             isAdmin: false,
@@ -73,8 +80,8 @@ export default {
             try {
                 const response = await axios.get('http://localhost:8080/users/dto/' + store.state.sessionData.id, config);
                 if (response.status == 200) {
-                    this.user = response.data;
-                    if (this.user.role == 'ADMIN') {
+                    this.myUser = response.data;
+                    if (this.myUser.role == 'ADMIN') {
                         this.isAdmin = true;
                     }
 
@@ -98,7 +105,7 @@ export default {
             };
 
             try {
-                if (this.user.role === 'ADMIN') {
+                if (this.myUser.role === 'ADMIN') {
 
                     const response = await axios.get('http://localhost:8080/users/', config);
 
