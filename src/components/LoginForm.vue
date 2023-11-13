@@ -24,7 +24,7 @@ import Cookies from 'js-cookie';
 export default {
     data() {
         return {
-            username: '', // Cambiar de email a username
+            username: '', 
             password: '',
             message: '',
         };
@@ -81,6 +81,7 @@ export default {
             } catch (tokenError) {
                 if (tokenError.response.status === 401) {
                     this.message = 'Usuario o contraseña incorrectos';
+                    console.error(tokenError)
                 } else {
                     console.error(tokenError);
                 }

@@ -41,14 +41,15 @@
                             <p class="role">{{ user.role }}</p>
                         </section>
 
-                        <form @submit.prevent="saveEditedUser(user)" v-if="editingUserId === user.id"
+                        <form @submit.prevent=" saveEditedUser(user)" v-if="editingUserId === user.id"
                             class="user-data editing">
-                            <input v-model="editedUsername" class="username" :placeholder="user.username" />
+                            <p class="error-message">{{ errormessage }}</p>
+                            <input v-model="this.editedUsername" class="username" :placeholder="user.username" />
 
-                            <input v-model="editedEmail" class="email" :placeholder="user.email" />
+                            <input v-model="this.editedEmail" class="email" :placeholder="user.email" />
 
-                            <select class="select-role role" v-model="role" required>
-                                <option value="" disabled="disabled" selected>{{ user.role }}</option>
+                            <select class="select-role role" v-model="this.editedRole" required>
+                                <option :value="user.role" disabled="disabled" selected="true">{{ user.role }}</option>
                                 <option value="ADMIN">ADMIN</option>
                                 <option value="USER">USER</option>
                             </select>
@@ -100,6 +101,9 @@ export default {
             },
             editedUsername: '',
             editedEmail: '',
+            editedRole: '',
+
+            errormessage: '',
         }
     },
     created() {
@@ -120,13 +124,15 @@ export default {
                     this.myUser = response.data;
                     if (this.myUser.role == 'ADMIN') {
                         this.isAdmin = true;
+                    }else if (this.myUser.role == 'BANNED') {
+                        router.push('/blocked');
                     }
 
                 }
             } catch (e) {
                 console.log(e);
                 if (e.response.status === 401) {
-
+                    router.push('/badsession')
                 } else if (e.response.status === 404) {
                     router.push('/badsession');
                 }
@@ -164,29 +170,89 @@ export default {
         async saveEditedUser(user) {
             // Lógica para guardar los cambios en el usuario
             // Puedes realizar una solicitud HTTP PUT al backend aquí
-            console.log('Guardar cambios para el usuario con ID:', user.id);
-            console.log('Nuevo nombre de usuario:', user.editedUsername);
-            console.log('Nuevo correo electrónico:', user.editedEmail);
-            this.editingUserId = null;
+            
+
+                console.log('Guardar cambios para el usuario con ID:', user.id);
+                console.log('Nuevo nombre de usuario:', this.editedUsername);
+                console.log('Nuevo correo electrónico:', this.editedEmail);
+                console.log('Nuevo role', this.editedRole);
+
+                  // Actualizar los valores en el objeto user
+
+                
+
+                
+                  try {
+                    // Crear un objeto para almacenar los cambios locales
+                    const changes = {};
+
+                    if (this.editedUsername !== ''){
+                        changes.username = this.editedUsername;
+                    }
+
+                    if (this.editedEmail !== ''){
+                        changes.email = this.editedEmail;    
+                    }
+                    
+                    if (this.editedRoles !== ''){
+                        changes.role = this.editedRole;
+                    }
+
+                    // Realizar la solicitud HTTP PUT al backend
+                    const edition = await axios.put(`http://localhost:8080/users/${user.id}`, changes, this.configToken);
 
 
+                    if (edition.status === 200){
+                        console.log('Respuesta del servidor:', edition);
+                        // Aplicar los cambios locales solo después de una respuesta exitosa
+                        Object.assign(user, changes);
 
-            // const edition = await axios.put('http://localhost:8080/users/' + user.id, this.configToken);
+                        this.editingUserId = null;
+                    }
+                    
+                } catch (error) {
+                    // Manejar el error
+                    if (error.response && error.response.status === 500) {
+                        // No hacer nada en caso de error 500
+                        this.errormessage = 'El nombre de usuario o el email ya están en uso'
+
+                    } else {
+                        console.error('Error al enviar la solicitud PUT:', error);
+                    }
+                }
+                
 
         },
-        blockUser(user) {
+        async blockUser(user) {
             console.log('Blocking user', user.username);
-            user.role = 'BANNED';
+            try{
+
+                user.role = 'BANNED';
+
+                const blockUser = await axios.put(`http://localhost:8080/users/${user.id}`,user, this.configToken)
+
+            }catch(error) {
+                console.error('Error al enviar la solicitud PUT: ' + error.message)
+            }
         },
-        unblockUser(user) {
-            console.log('Unblocking user', user.username);
-            user.role = 'USER';
+        async unblockUser(user) {
+            try {
+                user.role = 'USER';
+
+                const unBlockUser = await axios.put(`http://localhost:8080/users/${user.id}`,user, this.configToken)
+
+            } catch (error) {
+                console.error('Error al debloquear', user.username)
+            }
         },
         async deleteUser(user) {
             console.log('Deleting user', user.username);
             this.users.splice(user.id);
             try {
                 const deleteUser = await axios.delete('http://localhost:8080/users/' + user.id, this.configToken);
+
+                this.users.pop(user.id);
+
             } catch (error) {
 
             }

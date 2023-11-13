@@ -24,7 +24,7 @@
         .singout-but
             width: fit-content
             height: fit-content
-            background: #d9534f
+            background: $color-button-primary
             color: #fff
             border: none
             padding: 10px 20px
@@ -32,6 +32,8 @@
             border-radius: 5px
             cursor: pointer
             margin: 20px 0px
+            &:hover
+                background: $color-button-primary-hight
         .user-card
             display: flex
             flex-direction: row
@@ -135,34 +137,14 @@
                         padding: 15px 15px
                         font-size: 14px
                         border-radius: 5px
+                        background: $color-button-primary
+                        &:hover
+                            background: $color-button-primary-hight
                         &:disabled
                             background: #ccc
                             &:hover
-                                background: #ccc
                                 cursor: not-allowed
-                    .edit-but
-                        background: $color-edit
-
-                        &:hover
-                            background: $color-edit-high
-
-                    .block-but
-                        background: $color-block
-
-                        &:hover
-                            background: $color-block-high
-
-                    .unblock-but
-                        background: $color-unblock
-
-                        &:hover
-                            background: $color-unblock-high
-
-                    .delete-but
-                        background: $color-delete
-
-                        &:hover
-                            background: $color-delete-high
+                    
 
                 .editing
                     input
