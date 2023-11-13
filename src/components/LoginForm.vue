@@ -1,23 +1,20 @@
 <template>
-    <div>
-        <form @submit.prevent="login">
-            <div>
-                <label for="username">Nombre de usuario</label>
-                <input v-model="username" type="text" id="username" name="username" placeholder="Nombre de usuario"
-                    required />
-            </div>
+    <section class="login-container">
+        <h1 class="login-title">Iniciar sesión</h1>
+        <p v-if="message" class="login-message">{{ message }}</p>
+        <form @submit.prevent="login" class="login-form">
+            <label for="username" class="login-label">Nombre de usuario</label>
+            <input v-model="username" type="text" id="username" name="username" required class="login-input" />
 
-            <div>
-                <label for="password">Contraseña</label>
-                <input v-model="password" type="password" id="password" name="password" placeholder="Contraseña" required />
-            </div>
+            <label for="password" class="login-label">Contraseña</label>
+            <input v-model="password" type="password" id="password" name="password" required class="login-input" />
 
-            <div>
-                <button type="submit">Iniciar sesión</button>
-            </div>
+            <button type="submit" class="login-button">Iniciar sesión</button>
         </form>
-    </div>
+        <router-link to="/registro" class="login-link">¿No tienes cuenta?</router-link>
+    </section>
 </template>
+  
   
 <script>
 import router from '@/router/router';
@@ -29,6 +26,7 @@ export default {
         return {
             username: '', // Cambiar de email a username
             password: '',
+            message: '',
         };
     },
     methods: {
@@ -70,12 +68,7 @@ export default {
                                     // Redirige al usuario al home
                                     window.location.href = '/';
                                 }
-                            } else {
-                                console.error('Credenciales inválidas');
                             }
-                        } else {
-                            console.error('No se encontraron usuarios');
-                            return false; // Indica que no se encontraron usuarios
                         }
                     } catch (userError) {
                         console.error(userError);
@@ -86,7 +79,12 @@ export default {
                     console.error(response.data);
                 }
             } catch (tokenError) {
-                console.error(tokenError);
+                if (tokenError.response.status === 401) {
+                    this.message = 'Usuario o contraseña incorrectos';
+                } else {
+                    console.error(tokenError);
+                }
+
             }
         },
     },

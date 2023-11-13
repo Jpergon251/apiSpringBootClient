@@ -33,6 +33,7 @@ export default {
     data() {
         return {
             loggedIn: store.state.loggedIn,
+            sessionExpired: store.state.sessionExpired,
             isActive: false,
         };
     },

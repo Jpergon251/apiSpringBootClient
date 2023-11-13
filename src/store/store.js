@@ -19,13 +19,15 @@ export default createStore({
       role: decodedCookie.role
     },
     loggedIn: !!decodedCookie.token,
+
+
   },
   getters: {
     isLoggedIn: (state) => !!state.loggedIn, // Devuelve true si el usuario está autenticado
+
   },
 
   actions: {
-
   },
   modules: {},
 });

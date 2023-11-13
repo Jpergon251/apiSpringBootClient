@@ -1,6 +1,6 @@
 <template>
     <main>
-
+        <h2>Has sido bloqueado de este sitio</h2>
     </main>
 </template>
 
@@ -14,4 +14,3 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>

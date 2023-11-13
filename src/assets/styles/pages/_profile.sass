@@ -96,71 +96,123 @@
 
         .user-card
             display: flex
-            justify-content: space-between
+            justify-content: space-evenly
             align-items: center
             margin-bottom: 10px
             border-bottom: 1px solid #ccc
             padding: 10px
+            .user
+                width: 100%
+                display: flex
+                justify-content: space-evenly
+                align-items: center
+                .user-data
 
-            .user-data
-                flex: 1
-                margin-right: 20px
-
-            .username ,.email, .role, .jugadoresFavoritos
-                margin: 10px 0px
-                padding: 10px 20px
-                font-size: 18px
-                background: #ebebeb
-                border-radius: 5px
-            .username
-                font-size: 20px
-
-            .users-buttons
-                flex: 0
-
-                button
-                    color: #fff
-                    width: 110px
                     display: flex
-                    justify-content: space-around
-                    align-items: flex-end
-                    border: none
+                    flex-direction: column
+                    align-items: center
+                .username ,.email, .role
+                    width: 350px
                     margin: 10px 0px
-                    padding: 15px 15px
-                    font-size: 14px
+                    padding: 10px 20px
+                    font-size: 18px
+                    background: #ebebeb
                     border-radius: 5px
-                .edit-but
-                    background: $color-edit
+                .username
+                    font-size: 20px
 
-                    &:hover
-                        background: $color-edit-high
+                .users-buttons
+                    flex: 0
 
-                .block-but
-                    background: $color-block
+                    button
+                        color: #fff
+                        width: 100%
+                        display: flex
+                        justify-content: space-around
+                        align-items: flex-end
+                        border: none
+                        margin: 10px 0px
+                        padding: 15px 15px
+                        font-size: 14px
+                        border-radius: 5px
+                        &:disabled
+                            background: #ccc
+                            &:hover
+                                background: #ccc
+                                cursor: not-allowed
+                    .edit-but
+                        background: $color-edit
 
-                    &:hover
-                        background: $color-block-high
+                        &:hover
+                            background: $color-edit-high
 
-                .unblock-but
-                    background: $color-unblock
+                    .block-but
+                        background: $color-block
 
-                    &:hover
-                        background: $color-unblock-high
+                        &:hover
+                            background: $color-block-high
 
-                .delete-but
-                    background: $color-delete
+                    .unblock-but
+                        background: $color-unblock
 
-                    &:hover
-                        background: $color-delete-high
+                        &:hover
+                            background: $color-unblock-high
 
-    @media screen and (max-width: 768px)
+                    .delete-but
+                        background: $color-delete
 
-        .user-card
+                        &:hover
+                            background: $color-delete-high
+
+                .editing
+                    input
+                        border: 1px solid #6e6e6e
+                    select
+                        width: 100%
+                        border: 1px solid #6e6e6e
+                    section.edit-buttons
+                        width: 100%
+                        display: flex
+                        justify-content: space-evenly
+                        button
+                            margin: 20px 0px
+                            background: #6c93ff
+                            color: #fff
+                            &:hover
+                                background: #506dbd
+@media screen and (max-width: 768px)
+
+    .user-card
+        display: flex
+        flex-direction: column
+        section.user
             display: flex
             flex-direction: column
+            align-items: center
             .user-data
-                width: 100%
+                scale: 0.75
             .users-buttons
                 display: grid
                 grid-template-columns: repeat(2, 1fr)
                 gap: 10px
+
+    .profile-container
+        .profile-title
+            font-size: 24px
+
+        .user-info
+            .user-card
+                display: grid
+                grid-template-rows: repeat(2, 1fr)
+
+@media screen and (max-width: 350px)
+
+    .user-card
+        display: flex
+        flex-direction: column
+        section.user
+            display: flex
+            flex-direction: column
+            align-items: center
+            .user-data
+                scale: 0.6
