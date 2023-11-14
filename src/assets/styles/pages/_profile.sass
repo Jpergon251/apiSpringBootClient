@@ -33,7 +33,20 @@
             cursor: pointer
             margin: 20px 0px
             &:hover
-                background: $color-button-primary-hight
+                background: $color-button-primary-high
+        .edit-but
+            width: fit-content
+            height: fit-content
+            background: $color-button-primary
+            color: #fff
+            border: none
+            padding: 10px 12px
+            font-size: 16px
+            border-radius: 5px
+            cursor: pointer
+            margin: 20px 0px
+            &:hover
+                background: $color-button-primary-high
         .user-card
             display: flex
             flex-direction: row
@@ -57,6 +70,42 @@
                     &:nth-child(1)
                         font-weight: bold
                         font-style: italic
+
+            form
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                margin: 40px
+                .user-entry
+                    padding: 10px
+                    background: #f1f1f1
+                    border: 1px solid #ccc
+                    border-radius: 5px
+                    margin: 5px 0px
+                p.user-entry
+                    margin: 0
+                    background: #fff
+                    border: none
+
+                .error-message
+                    color: red
+                    font-weight: bold
+                    font-size: 12px
+                    text-align: center
+                .buttons-section
+                    display: flex
+                    flex-direction: row
+                    justify-content: space-evenly
+                    button
+                        color: #fff
+                        cursor: pointer
+                        border: none
+                        padding: 6px
+                        margin: 5px
+                        background: $color-blue
+                        border-radius: 5px
+                        &:hover
+                            background: $color-blue-high
             .ADMIN
                 color: #844fd9
             .USER
@@ -77,12 +126,13 @@
             border-radius: 5px
             cursor: pointer
             box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.1)
-            &:hover
-                background: #6b5f4b
+
         .hide-but
-            background: #887b62
+            background: $color-button-primary
             color: #fff
             width: fit-content
+            &:hover
+                background: $color-button-primary-high
         .users-list
             width: 80%
             max-width: 1000px
@@ -91,11 +141,31 @@
             border-radius: 5px
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
             margin-top: 20px
-
-        .users-title
-            font-size: 24px
-            font-weight: bold
-
+            .title-section
+                display: flex
+                justify-content: space-around
+                align-items: center
+                .users-title
+                    font-size: 24px
+                    font-weight: bold
+                .search-bar
+                    display: flex
+                    align-items: center
+                    justify-content: space-around
+                    border: 1px solid #ccc
+                    border-radius: 20px
+                    padding: 10px
+                    font-size: 16px
+                    border: 1px solid #ccc
+                    margin-right: 10px
+                    i
+                        margin: 5px
+                    input
+                        width: 100%
+                        margin: 5px
+                        border: none
+                        &:focus-visible
+                            outline: none
         .user-card
             display: flex
             justify-content: space-evenly
@@ -139,12 +209,11 @@
                         border-radius: 5px
                         background: $color-button-primary
                         &:hover
-                            background: $color-button-primary-hight
+                            background: $color-button-primary-high
                         &:disabled
                             background: #ccc
                             &:hover
                                 cursor: not-allowed
-                    
 
                 .editing
                     input
@@ -158,10 +227,10 @@
                         justify-content: space-evenly
                         button
                             margin: 20px 0px
-                            background: #6c93ff
+                            background: $color-blue
                             color: #fff
                             &:hover
-                                background: #506dbd
+                                background: $color-blue-high
 @media screen and (max-width: 768px)
 
     .user-card
@@ -172,21 +241,28 @@
             flex-direction: column
             align-items: center
             .user-data
-                scale: 0.75
+                scale: 0.7
             .users-buttons
                 display: grid
                 grid-template-columns: repeat(2, 1fr)
                 gap: 10px
 
     .profile-container
-        .profile-title
-            font-size: 24px
-
         .user-info
             .user-card
+                scale: 0.9
                 display: grid
-                grid-template-rows: repeat(2, 1fr)
-
+                grid-template-columns: repeat(2, 1fr)
+                gap: 10px
+                section
+                    &:nth-child(3)
+                        grid-column: span 2
+                .buttons-section
+                    display: flex
+                    flex-direction: row
+                    justify-content: flex-end
+                    button
+                        margin: 20px
 @media screen and (max-width: 350px)
 
     .user-card

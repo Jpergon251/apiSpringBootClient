@@ -1,45 +1,47 @@
 <template>
     <main>
+
         <ul class="partidas-list">
             <h1 class="partidas-title">PARTIDAS</h1>
-            <li class="partida" v-for="partida in partidas" :key="partida.id">
-                <section class="equipos-partida">
-                    <section class="equipo-container">
-                        <figure class="equipo-logo">
-                            <img class="equipo-logo-imagen" :src="partida.equipoLocal.logo" alt="Logo equipo">
-                        </figure>
-                        <h2 class="equipo-nombre">{{ partida.equipoLocal.nombre }}</h2>
-                        <p class="equipo-estado"
-                            :class="partida.equipoGanador === partida.equipoLocal.nombre ? 'Victoria' : 'Derrota'">{{
-                                partida.equipoGanador === partida.equipoLocal.nombre ? 'Victoria' :
-                                'Derrota' }}</p>
-                    </section>
-                    <span class="versus">VS</span>
-                    <section class="equipo-container">
-                        <figure class="equipo-logo">
-                            <img class="equipo-logo-imagen" :src="partida.equipoVisitante.logo" alt="Logo equipo">
-                        </figure>
-                        <h2 class="equipo-nombre">{{ partida.equipoVisitante.nombre }}</h2>
-                        <p class="equipo-estado"
-                            :class="partida.equipoGanador === partida.equipoVisitante.nombre ? 'Victoria' : 'Derrota'">{{
-                                partida.equipoGanador === partida.equipoVisitante.nombre ? 'Victoria' :
-                                'Derrota' }}
-                        </p>
-                    </section>
+            <section class="search-filters">
+                <section class="search-filter">
+                    <label for="localTeam">Equipo Local:</label>
+                    <input type="text" id="localTeam" v-model="localTeamSearch" @input="applyFilters">
                 </section>
-                <span class="fecha-partida">{{ partida.fecha }}</span>
+                <section class="search-filter">
+                    <label for="visitorTeam">Equipo Visitante:</label>
+                    <input type="text" id="visitorTeam" v-model="visitorTeamSearch" @input="applyFilters">
+                </section>
+                <section class="search-filter">
+                    <label for="startDate">Fecha de inicio:</label>
+                    <input type="date" id="startDate" v-model="startDate" @input="applyFilters">
+                </section>
+                <section class="search-filter">
+                    <label for="endDate">Fecha de fin:</label>
+                    <input type="date" id="endDate" v-model="endDate" @input="applyFilters">
+                </section>
+            </section>
+
+            <li class="partida" v-for="partida in filteredPartidas" :key="partida.id">
+                <MatchCard :partida="partida" />
             </li>
         </ul>
     </main>
 </template>
 
 <script>
+import MatchCard from '@/components/MatchCard.vue';
 import store from '@/store/store';
 import axios from 'axios'
 export default {
     data() {
         return {
             partidas: [],
+            filteredPartidas: [],
+            localTeamSearch: '',
+            visitorTeamSearch: '',
+            startDate: '',
+            endDate: '',
         }
     },
     created() {
@@ -55,16 +57,42 @@ export default {
                 }
             }
             try {
+
                 const response = await axios.get('http://localhost:8080/partidas/', config);
                 console.log(response.data);
 
                 if (response.status === 200) {
                     this.partidas = response.data
+                    this.filteredPartidas = this.partidas
                 }
             } catch (error) {
-
+                console.error(error);
             }
         },
+        applyFilters() {
+            // Aplicar los filtros
+            this.filteredPartidas = this.partidas.filter(partida =>
+                partida.equipoLocal.nombre.toLowerCase().startsWith(this.localTeamSearch.toLowerCase()) &&
+                partida.equipoVisitante.nombre.toLowerCase().startsWith(this.visitorTeamSearch.toLowerCase()) &&
+                this.filterByFecha(partida)
+            );
+            if (this.localTeamSearch === '' && this.visitorTeamSearch === '' && this.startDate === '' && this.endDate === '') {
+                this.filteredPartidas = this.partidas
+            }
+        },
+        filterByFecha(partida) {
+            if (this.startDate !== '' && this.endDate !== '') {
+                return partida.fecha >= this.startDate && partida.fecha <= this.endDate
+            } else if (this.startDate === '' && this.endDate !== '') {
+                return partida.fecha <= this.endDate
+            } else if (this.startDate !== '' && this.endDate === '') {
+                return partida.fecha >= this.startDate
+            }
+            return true
+        }
+    },
+    components: {
+        MatchCard
     }
 
 }
