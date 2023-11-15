@@ -1,11 +1,31 @@
-.partidas-list
-    margin: 0
-    padding: 0px
-    display: flex
-    flex-direction: column
-    align-items: center
-    list-style: none
+
+.partidas-container
     background: $color-background
+    .search-filters
+        width: 80%
+        max-width: 1000px
+        background: $color-background-high
+        display: flex
+        flex-direction: column
+        margin: 20px auto
+        padding: 20px
+        border-radius: 5px
+        box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1)
+        .search-filter
+
+            display: grid
+            grid-template-columns: 1fr 1fr
+            margin: 10px 0px
+            justify-items: center
+            text-align: left
+            input
+                width: 200px
+                padding: 10px
+                border-radius: 5px
+                border: none
+                box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1)
+                background: $color-background
+
     .partidas-title
         margin: 0
         padding: 20px 0px
@@ -15,62 +35,90 @@
         font-size: 42px
         font-weight: bold
         background: $gradient-title-background
-    .partida
-        border-radius: 5px
-        width: 500px
-        box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1)
-        display: flex
-        flex-direction: column
-        align-items: center
-        margin: 20px 0px
+
+    .partidas-list-container
+        margin: 0 auto
+        width: 80%
+        max-width: 1000px
         background: $color-background-high
-        .equipos-partida
+        border: 1px solid #ccc
+        padding: 20px
+        border-radius: 5px
+        box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1)
+        .partidas-list
+            background: $color-background
+            margin: 0
+            padding: 0px
             display: flex
+            flex-direction: column
             align-items: center
-            .equipo-container
+            list-style: none
+
+            .partida
+                border-radius: 5px
+                width: 500px
+                box-shadow: 0px 0px 5px 5px rgba(0, 0, 0, 0.1)
                 display: flex
                 flex-direction: column
                 align-items: center
-                margin: 10px 30px
-                .equipo-logo
-                    width: fit-content
-                    margin: 0px 10px
-                    .equipo-logo-imagen
-                        width: 150px
-                        padding: 10px
-                        image-rendering: optimizeSpeed
-                .equipo-estado
+                margin: 20px 0px
+                background: $color-background-high
+                .equipos-partida
+                    display: flex
+                    align-items: center
+                    .equipo-container
+                        display: flex
+                        flex-direction: column
+                        align-items: center
+                        margin: 10px 30px
+                        .equipo-logo
+                            width: fit-content
+                            margin: 0px 10px
+                            .equipo-logo-imagen
+                                width: 150px
+                                padding: 10px
+                                image-rendering: optimizeSpeed
+                        .equipo-estado
+                            font-weight: bold
+                            font-size: 18px
+                            animation: destello 3s infinite
+                            &.Victoria
+                                color: green
+                            &.Derrota
+                                color: red
+
+                .versus
+                    font-size: 36px
                     font-weight: bold
-                    font-size: 18px
-                    animation: destello 3s infinite
-                    &.Victoria
-                        color: green
-                    &.Derrota
-                        color: red
+                    color: #646464
+                .fecha-partida
+                    text-align: center
+                    width: 100%
+                    background-color: #ff3d3d
+                    color: white
+                    font-weight: bold
+                    padding: 10px
+                    border-radius: 5px
 
-        .versus
-            font-size: 36px
-            font-weight: bold
-            color: #646464
-        .fecha-partida
-            text-align: center
-            width: 100%
-            background-color: #ff3d3d
-            color: white
-            font-weight: bold
-            padding: 10px
-            border-radius: 5px
-
+@media screen and (max-width: 768px)
+    .partidas-list-container
+        .partidas-list
+            .partida
+                margin-top: -150px
+                scale: 0.8
 @media screen and (max-width: 560px)
-    .partidas-list
-        .partida
-            margin: -20px 0px
-            scale: 0.8
-@media screen and (max-width: 450px)
-    .partidas-list
-        .partida
-            margin: -30px 0px
-            scale: 0.65
+    .partidas-list-container
+        .partidas-list
+            .partida
+                margin-top: 0px
+                scale: 0.65
+
+@media screen and (max-width: 420px)
+    .partidas-list-container
+        .partidas-list
+            .partida
+                margin-top: -150px
+                scale: 0.5
 
 @keyframes destello
     0%

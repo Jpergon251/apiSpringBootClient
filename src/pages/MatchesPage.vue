@@ -1,31 +1,35 @@
 <template>
-    <main>
+    <main class="partidas-container">
 
-        <ul class="partidas-list">
-            <h1 class="partidas-title">PARTIDAS</h1>
-            <section class="search-filters">
-                <section class="search-filter">
-                    <label for="localTeam">Equipo Local:</label>
-                    <input type="text" id="localTeam" v-model="localTeamSearch" @input="applyFilters">
-                </section>
-                <section class="search-filter">
-                    <label for="visitorTeam">Equipo Visitante:</label>
-                    <input type="text" id="visitorTeam" v-model="visitorTeamSearch" @input="applyFilters">
-                </section>
-                <section class="search-filter">
-                    <label for="startDate">Fecha de inicio:</label>
-                    <input type="date" id="startDate" v-model="startDate" @input="applyFilters">
-                </section>
-                <section class="search-filter">
-                    <label for="endDate">Fecha de fin:</label>
-                    <input type="date" id="endDate" v-model="endDate" @input="applyFilters">
-                </section>
+        <h1 class="partidas-title">PARTIDAS</h1>
+
+        <section class="search-filters">
+            <section class="search-filter">
+                <label for="localTeam">Equipo Local:</label>
+                <label for="visitorTeam">Equipo Visitante:</label>
+                <input type="text" id="localTeam" v-model="localTeamSearch" @input="applyFilters">
+                <input type="text" id="visitorTeam" v-model="visitorTeamSearch" @input="applyFilters">
             </section>
 
-            <li class="partida" v-for="partida in filteredPartidas" :key="partida.id">
-                <MatchCard :partida="partida" />
-            </li>
-        </ul>
+            <section class="search-filter">
+                <label for="startDate">Fecha de inicio:</label>
+                <label for="endDate">Fecha de fin:</label>
+                <input type="date" id="startDate" v-model="startDate" @input="applyFilters">
+                <input type="date" id="endDate" v-model="endDate" @input="applyFilters">
+            </section>
+        </section>
+
+
+        <section class="partidas-list-container">
+            <ul class="partidas-list">
+
+                <li class="partida" v-for="partida in filteredPartidas" :key="partida.id">
+                    <MatchCard :partida="partida" />
+                </li>
+
+            </ul>
+        </section>
+
     </main>
 </template>
 
