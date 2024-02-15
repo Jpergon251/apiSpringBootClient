@@ -1,10 +1,11 @@
 <template>
     <header v-if="loggedIn" class="header">
-        <!-- <figure class="logo">
+        <figure class="logo">
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/League_of_Legends_2019_vector.svg/800px-League_of_Legends_2019_vector.svg.png"
                 alt="Logo">
-        </figure> -->
+        </figure>
         <section class="sponsor-group">
+            <p>Patrocinado por</p>
             <a href="#" class="sponsor-logo"></a>
         </section>
 
@@ -20,6 +21,7 @@
                 <router-link to="/perfil" class="link">Perfil</router-link>
             </nav>
         </section>
+   
 
     </header>
 </template>

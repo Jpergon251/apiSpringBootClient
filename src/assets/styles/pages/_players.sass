@@ -1,1 +1,63 @@
+@import "../components/_playercard"
+@import "../components/_oneplayer"
 
+.players-page
+    background: #fff
+    .team-info
+        display: flex
+        flex-direction: column
+        align-items: center
+        margin: 0
+        .team-name
+            margin: 0
+            padding: 20px 0px
+            width: 100%
+            color: white
+            text-align: center
+            font-size: 42px
+            font-weight: bold
+            background: $gradient-title-background
+        section
+            display: flex
+            flex-direction: row
+            align-items: center
+            margin: 0px 0px
+            .team-description
+                margin: 0px 25px
+                width: 600px
+                font-size: 20px
+                text-align: justify
+            .team-coach-card
+                width: 500px
+                display: flex
+                flex-direction: column
+                .coach-name
+                    width: 100%
+                    border-top: 1px solid #ccc
+                    text-align: center
+                    margin: 0
+                    padding:  10px 0px
+                    font-size:  24px
+                .coach-img
+                    image-rendering: optimizeSpeed
+                    margin: 0
+                    
+                         
+                 
+    .players-list
+        list-style: none
+        display: flex
+        flex-wrap: wrap
+        justify-content: center
+        .player
+            display: flex
+            flex-direction: column
+            align-items: center
+            margin: 40px 30px
+            width: 500px
+            max-height: fit-content
+        .player:hover
+            scale: 1.1
+            transition: all 0.1s
+                
+            

@@ -2,6 +2,8 @@
 .profile-container
     background: #f1f1f1
 
+    
+
     .profile-title
         margin: 0
         padding: 20px 0px
@@ -11,6 +13,18 @@
         font-size: 42px
         font-weight: bold
         background: $gradient-title-background
+
+    .players-section
+        width: 80%
+        max-width: 1000px
+        background: #fff
+        text-align: left
+        margin: 10px auto
+        padding: 20px
+        border-radius: 5px
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+        .no-players
+            text-align: center
 
     .user-info
         width: 80%
@@ -231,6 +245,8 @@
                             color: #fff
                             &:hover
                                 background: $color-blue-high
+
+        
 @media screen and (max-width: 768px)
 
     .user-card

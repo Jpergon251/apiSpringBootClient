@@ -1,6 +1,8 @@
 
 .partidas-container
+
     background: $color-background
+    margin: 0px
     .search-filters
         width: 80%
         max-width: 1000px
@@ -18,6 +20,10 @@
             margin: 10px 0px
             justify-items: center
             text-align: left
+            label
+                font-weight: bold
+                margin-bottom: 5px
+
             input
                 width: 200px
                 padding: 10px
@@ -99,6 +105,10 @@
                     font-weight: bold
                     padding: 10px
                     border-radius: 5px
+        .no-matches
+            text-align: center
+            font-size: 24px
+            font-weight: bold
 
 @media screen and (max-width: 768px)
     .partidas-list-container
