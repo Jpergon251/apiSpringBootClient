@@ -2,7 +2,7 @@
   <main class="players-page">
     <section class="team-info">
       <h1 class="team-name">{{ equipo.nombre }}</h1>
-      <section>
+      <section class="team-data">
         <p class="team-description" v-if="equipo.descripcion">
           {{ equipo.descripcion }}
         </p>
@@ -59,7 +59,14 @@
               </span>
             </div>
           </section>
-          <button class="favorite-button">
+          <!-- <button
+            onclick="this.addToFavorites(jugador)"
+            class="favorite-button"
+          >
+            <i class="far fa-star" aria-hidden="true"></i>
+          </button> -->
+
+          <button class="favorite-button" @click="addToFavorites(jugador)">
             <i class="far fa-star" aria-hidden="true"></i>
           </button>
         </section>
@@ -182,28 +189,27 @@ export default {
 
       return (totalKDA / jugadores.length).toFixed(2);
     },
-    // async addToFavorites(jugador) {
-    //   try {
-    //     const response = await axios.post(
-    //       `http://localhost:8080/users/${store.state.sessionData.id}/favorites`,
-    //       {
-    //         jugador: jugador,
-    //       },
-    //       {
-    //         headers: {
-    //           Authorization: `Bearer ${store.state.token}`,
-    //         },
-    //       }
-    //     );
+    async addToFavorites(jugador) {
+      try {
+        const response = await axios.post(
+          `http://localhost:8080/users/${store.state.sessionData.id}/favorites`,
+          {
+            jugador: jugador,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${store.state.token}`,
+            },
+          }
+        );
 
-    //     if (response.status === 200) {
-    //       // Actualiza la lista de favoritos en el equipo
-    //       this.equipo.jugadoresFavoritos.push(jugador);
-    //     }
-    //   } catch (error) {
-    //     console.error(error);
-    //   }
-    // },
+        if (response.status === 200) {
+          console.log(response.data);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
   components: {
     TeamStats,

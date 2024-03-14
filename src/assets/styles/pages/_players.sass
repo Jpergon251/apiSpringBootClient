@@ -28,7 +28,6 @@
                 font-size: 20px
                 text-align: justify
             .team-coach-card
-                width: 500px
                 display: flex
                 flex-direction: column
                 .coach-name
@@ -59,5 +58,45 @@
         .player:hover
             scale: 1.1
             transition: all 0.1s
+
+@media screen and (max-width: 1200px)
+    .players-page
+        .team-info
+            .team-data
+                display: flex
+                flex-direction: column-reverse
+                .team-description
+                    margin: 10px 0px
+                .team-coach-card
+                    margin: 10px 0px
+@media screen and (max-width: 768px)
+    .players-page
+        .team-info
+            .team-data
+                .team-description
+                    scale: 0.9
+                .team-coach-card
+                    scale: 0.9
+        .players-list
+            .player
+                scale: 0.9
                 
-            
+@media screen and ( max-width: 560px)
+    .players-page
+        width: 100%
+        .team-info
+            .team-data
+                
+                .team-description
+                    width: 80%
+        .players-list
+            display: flex
+            flex-direction: column
+            align-items: center
+            padding: 0px 0px 0px 0px 
+            .player
+                width: 30px
+                font-size: 20px
+                scale: 0.7
+                &:hover
+                    scale: 0.8

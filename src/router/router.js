@@ -75,6 +75,11 @@ const routes = [
     meta: {
       requiresAuth: true
     }
+  },
+  {
+    path: '/partidas/:id',
+    name: 'Partida',
+    component: () => import('../pages/MatchPage.vue'),
   }
 ]
 

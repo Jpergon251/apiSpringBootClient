@@ -42,15 +42,26 @@
       <ul class="partidas-list">
         <li
           class="partida"
-          v-for="partida in filteredPartidas"
+          v-for="(partida, index) in filteredPartidas.slice(0, visiblePartidas)"
           :key="partida.id"
         >
           <MatchCard :partida="partida" />
         </li>
       </ul>
+
       <p class="no-matches" v-if="filteredPartidas.length === 0">
         No hay partidas disponibles
       </p>
+    </section>
+
+    <section class="load-more-container">
+      <button
+        class="load-more-button"
+        @click="cargarMas"
+        v-if="visiblePartidas < filteredPartidas.length"
+      >
+        Cargar más partidas
+      </button>
     </section>
   </main>
 </template>
@@ -68,6 +79,8 @@ export default {
       visitorTeamSearch: "",
       startDate: "",
       endDate: "",
+      visiblePartidas: 10, // Cambia el número inicial de partidas visibles
+      partidasPorCargar: 5, // Cambia el número de partidas a cargar cada vez
     };
   },
   created() {
@@ -89,7 +102,11 @@ export default {
         console.log(response.data);
 
         if (response.status === 200) {
-          this.partidas = response.data;
+          // Ordenar las partidas por fecha en orden ascendente
+          this.partidas = response.data.sort(
+            (a, b) => new Date(b.fecha) - new Date(a.fecha)
+          );
+
           this.filteredPartidas = this.partidas;
         }
       } catch (error) {
@@ -126,6 +143,9 @@ export default {
         return partida.fecha >= this.startDate;
       }
       return true;
+    },
+    cargarMas() {
+      this.visiblePartidas += this.partidasPorCargar;
     },
   },
   components: {

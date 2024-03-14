@@ -1,0 +1,52 @@
+@import "../node_modules/bootstrap/scss/bootstrap.scss"
+@import "../components/_progressbar"
+
+
+.team-stats-title
+        margin: 20px 0px
+        text-align: center
+        font-size: 36px
+        font-weight: bold
+
+.team-stats-container
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+    .pie-chart
+        margin: 10px 0
+        font-size: 36px
+        font-weight: bold 
+        display: flex
+        flex-direction: row-reverse
+        p
+            margin: auto
+            text-align: center
+            width: 100%
+            max-width: 150px
+        .victories
+           color: $color-accent-high
+
+        .defeats
+            color: #2e2333
+    .bar-chart
+        margin: 10px
+
+        h3
+            font-size: 36px
+            margin: 10px 0
+        
+
+@media screen and (max-width: 768px)
+    .team-stats-container
+        flex-direction: column
+        .pie-chart
+            canvas
+                width: 150px !important
+                height: 150px !important
+            p
+                font-size: 24px
+        .bar-chart
+            h3
+                font-size: 20px
+            h4                
+                font-size: 16px

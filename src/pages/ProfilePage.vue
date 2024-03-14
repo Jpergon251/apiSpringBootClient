@@ -51,7 +51,9 @@
     <section class="players-section">
       <h2 class="players-title">Jugadores favoritos</h2>
       <ul class="players-fav-list" v-if="myUser.jugadoresFavoritos.length > 0">
-        <li></li>
+        <li v-for="jugador in myUser.jugadoresFavoritos" :key="jugador.id">
+          <h1>{{ jugador.nombre }}</h1>
+        </li>
       </ul>
       <p class="no-players" v-else>No hay jugadores favoritos</p>
     </section>
