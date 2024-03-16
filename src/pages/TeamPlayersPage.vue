@@ -36,6 +36,10 @@
               <p class="player-name">{{ jugador.nombre }}</p>
               <p class="player-position">{{ jugador.posicion }}</p>
             </div>
+
+            <button @click="addToFavorites(jugador)">
+              <i class="far fa-star" aria-hidden="true"></i>
+            </button>
           </section>
           <section class="player-stats">
             <div class="champion-container">
@@ -65,10 +69,6 @@
           >
             <i class="far fa-star" aria-hidden="true"></i>
           </button> -->
-
-          <button class="favorite-button" @click="addToFavorites(jugador)">
-            <i class="far fa-star" aria-hidden="true"></i>
-          </button>
         </section>
       </li>
     </ul>
@@ -83,6 +83,7 @@
 import store from "@/store/store";
 import axios from "axios";
 import TeamStats from "../components/TeamStats.vue";
+
 export default {
   data() {
     return {
@@ -193,9 +194,7 @@ export default {
       try {
         const response = await axios.post(
           `http://localhost:8080/users/${store.state.sessionData.id}/favorites`,
-          {
-            jugador: jugador,
-          },
+          jugador,
           {
             headers: {
               Authorization: `Bearer ${store.state.token}`,

@@ -52,7 +52,11 @@
       <h2 class="players-title">Jugadores favoritos</h2>
       <ul class="players-fav-list" v-if="myUser.jugadoresFavoritos.length > 0">
         <li v-for="jugador in myUser.jugadoresFavoritos" :key="jugador.id">
-          <h1>{{ jugador.nombre }}</h1>
+          <h2>{{ jugador.nick }}</h2>
+          <img :src="jugador.foto" />
+          <button @click="removeFromFavorites(jugador.id)">
+            Eliminar <i class="fas fa-minus"></i>
+          </button>
         </li>
       </ul>
       <p class="no-players" v-else>No hay jugadores favoritos</p>
@@ -118,7 +122,7 @@ export default {
       editedEmail: "",
       errorMessage: "",
       searchQuery: "", // propiedad para almacenar la consulta de búsqueda
-
+      favPlayers: [],
       filteredUsers: [],
     };
   },
@@ -189,6 +193,7 @@ export default {
         );
         if (response.status == 200) {
           this.myUser = response.data;
+          this.favPlayers = this.myUser.jugadoresFavoritos;
           if (this.myUser.role == "ADMIN") {
             this.isAdmin = true;
           } else if (this.myUser.role == "BANNED") {
@@ -216,6 +221,34 @@ export default {
       } catch (error) {
         // Manejo de errores
         console.error(error);
+      }
+    },
+    async removeFromFavorites(idJugador) {
+      try {
+        const userId = store.state.sessionData.id; // Obtener el ID del usuario
+        const response = await axios.delete(
+          `http://localhost:8080/users/${userId}/favorites/${idJugador}`,
+
+          {
+            headers: {
+              Authorization: `Bearer ${store.state.token}`,
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          console.log("Jugador eliminado de favoritos:", idJugador);
+          // Encontrar el índice del jugador en la lista favPlayers
+          const index = this.favPlayers.findIndex(
+            (jugador) => jugador.id === idJugador
+          );
+          if (index !== -1) {
+            // Eliminar el jugador del array favPlayers
+            this.favPlayers.splice(index, 1);
+          }
+        }
+      } catch (error) {
+        console.error("Error al eliminar jugador de favoritos:", error);
       }
     },
   },

@@ -25,6 +25,31 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
         .no-players
             text-align: center
+        .players-fav-list
+            list-style: none
+            display: grid
+            grid-template-columns: repeat(3, 1fr) // Define 3 columnas autoajustables
+            gap: 20px // Espacio entre elementos
+            li
+                text-align: center
+                h2
+                    margin: 0
+                    font-size: 24px
+                img
+                    width: 30%
+                button
+                    width: fit-content
+                    height: fit-content
+                    background: $color-button-primary
+                    color: #fff
+                    border: none
+                    padding: 10px 20px
+                    font-size: 16px
+                    border-radius: 5px
+                    cursor: pointer
+                    margin: 20px 0px
+                    &:hover
+                        background: $color-button-primary-high
 
     .user-info
         width: 80%

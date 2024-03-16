@@ -1,5 +1,4 @@
 import { createStore } from 'vuex';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 
 
