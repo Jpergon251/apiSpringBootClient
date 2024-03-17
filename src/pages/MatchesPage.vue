@@ -96,7 +96,7 @@ export default {
       };
       try {
         const response = await axios.get(
-          "http://localhost:8080/partidas/",
+          "https://apispringbootserver.up.railway.app/partidas/",
           config
         );
         console.log(response.data);

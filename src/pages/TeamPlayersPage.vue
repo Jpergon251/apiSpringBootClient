@@ -118,7 +118,7 @@ export default {
       };
       try {
         const response = await axios.get(
-          `http://localhost:8080/equipos/${this.$route.params.id}/`,
+          `https://apispringbootserver.up.railway.app/equipos/${this.$route.params.id}/`,
           config
         );
         if (response.status === 200) {
@@ -193,7 +193,7 @@ export default {
     async addToFavorites(jugador) {
       try {
         const response = await axios.post(
-          `http://localhost:8080/users/${store.state.sessionData.id}/favorites`,
+          `https://apispringbootserver.up.railway.app/users/${store.state.sessionData.id}/favorites`,
           jugador,
           {
             headers: {

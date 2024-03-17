@@ -160,7 +160,7 @@ export default {
         }
 
         const response = await axios.put(
-          "http://localhost:8080/users/" + user.id,
+          "https://apispringbootserver.up.railway.app/users/" + user.id,
           changes,
           this.configToken
         );
@@ -188,7 +188,8 @@ export default {
       };
       try {
         const response = await axios.get(
-          "http://localhost:8080/users/dto/" + store.state.sessionData.id,
+          "https://apispringbootserver.up.railway.app/users/dto/" +
+            store.state.sessionData.id,
           config
         );
         if (response.status == 200) {
@@ -211,7 +212,7 @@ export default {
       try {
         if (this.myUser.role === "ADMIN") {
           const response = await axios.get(
-            "http://localhost:8080/users/",
+            "https://apispringbootserver.up.railway.app/users/",
             this.configToken
           );
 
@@ -227,7 +228,7 @@ export default {
       try {
         const userId = store.state.sessionData.id; // Obtener el ID del usuario
         const response = await axios.delete(
-          `http://localhost:8080/users/${userId}/favorites/${idJugador}`,
+          `https://apispringbootserver.up.railway.app/users/${userId}/favorites/${idJugador}`,
 
           {
             headers: {
