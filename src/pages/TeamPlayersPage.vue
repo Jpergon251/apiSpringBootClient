@@ -37,7 +37,7 @@
               <p class="player-position">{{ jugador.posicion }}</p>
             </div>
 
-            <button @click="addToFavorites(jugador)">
+            <button class="fav-but" @click="addToFavorites(jugador)">
               <i class="far fa-star" aria-hidden="true"></i>
             </button>
           </section>
@@ -63,12 +63,6 @@
               </span>
             </div>
           </section>
-          <!-- <button
-            onclick="this.addToFavorites(jugador)"
-            class="favorite-button"
-          >
-            <i class="far fa-star" aria-hidden="true"></i>
-          </button> -->
         </section>
       </li>
     </ul>
