@@ -58,7 +58,7 @@ export default {
 
       try {
         const response = await axios.get(
-          `https://apispringbootserver.up.railway.app/jugadores/dto/${this.$route.params.id}/`,
+          `http://localhost:8080/jugadores/dto/${this.$route.params.id}/`,
           config
         );
         if (response.status === 200) {

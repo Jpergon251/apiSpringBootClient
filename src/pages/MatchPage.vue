@@ -241,7 +241,7 @@ export default {
       };
       try {
         const response = await axios.get(
-          "https://apispringbootserver.up.railway.app/partidas/" + this.$route.params.id + "/",
+          "http://localhost:8080/partidas/" + this.$route.params.id + "/",
           config
         );
         console.log(response.data);

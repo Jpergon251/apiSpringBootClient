@@ -144,7 +144,7 @@ export default {
 
         // Realizar la solicitud HTTP PUT al backend
         const edition = await axios.put(
-          `https://apispringbootserver.up.railway.app/users/${user.id}`,
+          `http://localhost:8080/users/${user.id}`,
           changes,
           this.configToken
         );
@@ -197,7 +197,7 @@ export default {
       console.log("Deleting user", user.username);
       try {
         const deleteUser = await axios.delete(
-          "https://apispringbootserver.up.railway.app/users/" + user.id,
+          "http://localhost:8080/users/" + user.id,
           this.configToken
         );
 

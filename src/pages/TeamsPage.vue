@@ -35,7 +35,7 @@ export default {
         },
       };
       const response = await axios.get(
-        "https://apispringbootserver.up.railway.app/equipos/",
+        "http://localhost:8080/equipos/",
         config
       );
       console.log(response.data);
