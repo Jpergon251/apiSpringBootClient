@@ -244,12 +244,11 @@ export default {
           "https://apispringbootserver.up.railway.app/partidas/" + this.$route.params.id + "/",
           config
         );
-        console.log(response.data);
         if (response.status === 200) {
           this.partida = response.data;
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     formatDuracion(duracion) {

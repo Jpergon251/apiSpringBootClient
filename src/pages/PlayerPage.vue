@@ -63,7 +63,6 @@ export default {
         );
         if (response.status === 200) {
           this.player = response.data;
-          console.log(this.player);
         }
       } catch (error) {}
     },

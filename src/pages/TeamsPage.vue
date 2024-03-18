@@ -38,7 +38,6 @@ export default {
         "https://apispringbootserver.up.railway.app/equipos/",
         config
       );
-      console.log(response.data);
       this.equipos = response.data;
     },
   },

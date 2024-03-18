@@ -98,18 +98,18 @@ export default {
               }
             }
           } catch (userError) {
-            console.error(userError);
+            // console.error(userError);
           }
         } else {
           // Maneja el error o muestra un mensaje de inicio de sesión fallido
-          console.error(response.data);
+          // console.error(response.data);
         }
       } catch (tokenError) {
         if (tokenError.response.status === 401) {
           this.message = "Usuario o contraseña incorrectos";
-          console.error(tokenError);
+          // console.error(tokenError);
         } else {
-          console.error(tokenError);
+          // console.error(tokenError);
         }
       }
     },

@@ -64,19 +64,18 @@ export default {
 
         if (response.status === 201) {
           // Registro exitoso
-          console.log("Usuario registrado con éxito.", response.data);
 
           // Lleva a la página de inicio de sesión
           this.$router.push("/login");
         } else {
           // Otro error
-          console.error("Error al registrar al usuario:", response.data);
+          // console.error("Error al registrar al usuario:", response.data);
         }
       } catch (error) {
         if (error.response.status === 400) {
           // Error de validación
           this.message = error.response.data;
-          console.error("Error de validación:", error.response.data);
+          // console.error("Error de validación:", error.response.data);
         }
       }
     },
