@@ -58,7 +58,7 @@ export default {
       this.message = "";
       try {
         const response = await axios.post(
-          "https://apispringbootserver.up.railway.app/users/create",
+          "http://localhost:8080/users/create",
           this.formData
         );
 

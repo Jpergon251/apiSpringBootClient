@@ -56,7 +56,7 @@ export default {
       };
       try {
         const response = await axios.post(
-          "https://apispringbootserver.up.railway.app/token",
+          "http://localhost:8080/token",
           null,
           config
         );
@@ -71,7 +71,7 @@ export default {
 
           try {
             const userResponse = await axios.get(
-              "https://apispringbootserver.up.railway.app/users/dto/",
+              "http://localhost:8080/users/dto/",
               userConfig
             );
             if (userResponse.data && userResponse.data.length > 0) {
