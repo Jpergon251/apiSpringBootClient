@@ -99,7 +99,6 @@ export default {
           "http://localhost:8080/partidas/",
           config
         );
-        console.log(response.data);
 
         if (response.status === 200) {
           // Ordenar las partidas por fecha en orden ascendente
@@ -110,7 +109,7 @@ export default {
           this.filteredPartidas = this.partidas;
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     applyFilters() {

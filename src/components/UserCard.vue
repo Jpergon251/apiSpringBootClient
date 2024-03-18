@@ -116,16 +116,6 @@ export default {
       // Puedes reiniciar las propiedades editedUsername y editedEmail aquí si es necesario
     },
     async saveEditedUser(user) {
-      // Lógica para guardar los cambios en el usuario
-      // Puedes realizar una solicitud HTTP PUT al backend aquí
-
-      console.log("Guardar cambios para el usuario con ID:", user.id);
-      console.log("Nuevo nombre de usuario:", this.editedUsername);
-      console.log("Nuevo correo electrónico:", this.editedEmail);
-      console.log("Nuevo role", this.editedRole);
-
-      // Actualizar los valores en el objeto user
-
       try {
         // Crear un objeto para almacenar los cambios locales
         const changes = {};
@@ -150,7 +140,6 @@ export default {
         );
 
         if (edition.status === 200) {
-          console.log("Respuesta del servidor:", edition);
           // Aplicar los cambios locales solo después de una respuesta exitosa
           Object.assign(user, changes);
 
@@ -162,12 +151,11 @@ export default {
           // No hacer nada en caso de error 500
           this.errormessage = "El nombre de usuario o el email ya están en uso";
         } else {
-          console.error("Error al enviar la solicitud PUT:", error);
+          // console.error("Error al enviar la solicitud PUT:", error);
         }
       }
     },
     async blockUser(user) {
-      console.log("Blocking user", user.username);
       try {
         user.role = "BANNED";
 
@@ -177,7 +165,7 @@ export default {
           this.configToken
         );
       } catch (error) {
-        console.error("Error al enviar la solicitud PUT: " + error.message);
+        // console.error("Error al enviar la solicitud PUT: " + error.message);
       }
     },
     async unblockUser(user) {
@@ -190,11 +178,10 @@ export default {
           this.configToken
         );
       } catch (error) {
-        console.error("Error al debloquear", user.username);
+        // console.error("Error al debloquear", user.username);
       }
     },
     async deleteUser(user) {
-      console.log("Deleting user", user.username);
       try {
         const deleteUser = await axios.delete(
           "http://localhost:8080/users/" + user.id,
@@ -202,9 +189,7 @@ export default {
         );
 
         this.users.pop(user.id);
-      } catch (error) {
-        console.log("Error al borrar el usuario", error);
-      }
+      } catch (error) {}
     },
   },
 };

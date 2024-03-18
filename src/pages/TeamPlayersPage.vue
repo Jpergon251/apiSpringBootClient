@@ -117,10 +117,9 @@ export default {
         );
         if (response.status === 200) {
           this.equipo = response.data;
-          console.log(this.equipo);
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
 
@@ -141,11 +140,9 @@ export default {
               image: `https://ddragon.leagueoflegends.com/cdn/12.4.1/img/champion/${championInfo.image.full}`,
             };
           });
-
-          console.log(simplifiedChamps);
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
     getChampionImageURL(championName) {
@@ -179,7 +176,6 @@ export default {
 
       for (const jugador of jugadores) {
         totalKDA += jugador.kda;
-        console.log(totalKDA);
       }
 
       return (totalKDA / jugadores.length).toFixed(2);
@@ -197,10 +193,9 @@ export default {
         );
 
         if (response.status === 200) {
-          console.log(response.data);
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     },
   },

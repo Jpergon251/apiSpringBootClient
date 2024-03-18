@@ -164,18 +164,15 @@ export default {
           changes,
           this.configToken
         );
-        console.log(response);
 
         if (response.status == 200) {
           this.editingUserId = null;
           Object.assign(user, changes);
-          console.log(response);
         } else if (response.status == 500) {
           this.errorMessage = response.data.message;
         }
       } catch (error) {
         if (error.response.status === 500) {
-          console.log(error);
           this.errorMessage = "Nombre de usuario o email ya en uso";
         }
       }
@@ -201,7 +198,6 @@ export default {
           }
         }
       } catch (e) {
-        console.log(e);
         if (e.code === "ERR_NETWORK") {
           router.push("/badsession");
         }
@@ -220,7 +216,7 @@ export default {
         }
       } catch (error) {
         // Manejo de errores
-        console.error(error);
+        // console.error(error);
       }
     },
     async removeFromFavorites(idJugador) {
@@ -237,7 +233,6 @@ export default {
         );
 
         if (response.status === 200) {
-          console.log("Jugador eliminado de favoritos:", idJugador);
           // Encontrar el índice del jugador en la lista favPlayers
           const index = this.favPlayers.findIndex(
             (jugador) => jugador.id === idJugador
@@ -248,7 +243,7 @@ export default {
           }
         }
       } catch (error) {
-        console.error("Error al eliminar jugador de favoritos:", error);
+        // console.error("Error al eliminar jugador de favoritos:", error);
       }
     },
   },

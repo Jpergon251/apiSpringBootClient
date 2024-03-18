@@ -38,7 +38,6 @@ export default {
         "http://localhost:8080/equipos/",
         config
       );
-      console.log(response.data);
       this.equipos = response.data;
     },
   },

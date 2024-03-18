@@ -1,19 +1,17 @@
 <template>
-    <main>
-        <LoginForm />
-    </main>
+  <main>
+    <LoginForm />
+  </main>
 </template>
 
 <script>
-import LoginForm from '../components/LoginForm.vue'
+import LoginForm from "../components/LoginForm.vue";
 export default {
-    setup() {
-
-
-        return {}
-    },
-    components: {
-        LoginForm
-    }
-}
+  setup() {
+    return {};
+  },
+  components: {
+    LoginForm,
+  },
+};
 </script>
